@@ -17,8 +17,12 @@ class Parser:
         src = self.get_html(url=f'https://surdo.me/vocabulary/vocabulary.html?gesture={self.word}')
         soup = BeautifulSoup(src, "lxml")
         video = soup.find("video")
-        video_src = video.find("source").get('src')
-        return 'https://surdo.me/' + video_src
+        try:
+            video_src = video.find("source").get('src')
+            return 'https://surdo.me/' + video_src
+        except:
+            video_src = 'Жест не найден'
+            return video_src
 
 
 
